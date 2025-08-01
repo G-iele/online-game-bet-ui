@@ -9,7 +9,7 @@ import { RegisterPage } from "./pages/register-page/register-page";
 
 export function App(): ReactElement {
   return (
-    <BrowserRouter basename="/online-game-bet-ui">
+    <BrowserRouter>
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Navigate to="/register" />} />
@@ -29,7 +29,7 @@ export function App(): ReactElement {
               <div style={{ padding: 40, textAlign: "center" }}>
                 <h1>404</h1>
                 <p>You can try again!</p>
-                <a href="/online-game-bet-ui/register">Go to Registration</a>
+                <a href="/register">Go back</a>
               </div>
             }
           />
