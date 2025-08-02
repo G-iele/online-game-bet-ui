@@ -6,7 +6,6 @@ type TransactionDisplayProps = {
   onPageChange: (newPage: number, totalPages: number) => void;
   page: number;
   totalPages: number;
-  loading: boolean;
 };
 
 export const TransactionDisplay: React.FC<TransactionDisplayProps> = ({
@@ -14,7 +13,6 @@ export const TransactionDisplay: React.FC<TransactionDisplayProps> = ({
   onPageChange,
   page,
   totalPages,
-  loading,
 }) => {
   const { formatCurrency } = useCurrencyFormatting();
 
@@ -33,11 +31,7 @@ export const TransactionDisplay: React.FC<TransactionDisplayProps> = ({
           </tr>
         </thead>
         <tbody>
-          {loading ? (
-            <tr>
-              <td colSpan={4}>Loading...</td>
-            </tr>
-          ) : transactions?.total ? (
+          {transactions?.total ? (
             transactions.data.map((transaction) => (
               <tr key={transaction.id}>
                 <th scope="row">{transaction.id}</th>

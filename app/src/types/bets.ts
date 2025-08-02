@@ -1,4 +1,4 @@
-export type BetStatus = "win" | "lost" | "cancel";
+export type BetStatus = "win" | "lost" | "canceled";
 
 export type BetQuery = {
   page: number;
@@ -16,8 +16,8 @@ export type BetsContextProps = {
   onPageChange: (newPage: number, totalPages: number) => void;
   statusFilter: BetStatus | null;
   setStatusFilter: (status: BetStatus | null) => void;
-  loading: boolean;
   getBets: () => Promise<void>;
+  onCancel: (id: string) => Promise<void>;
 };
 
 export type Bet = {
@@ -26,6 +26,7 @@ export type Bet = {
   amount: number;
   winAmount: number;
   status: string;
+  loading?: boolean;
 };
 
 export type Bets = {

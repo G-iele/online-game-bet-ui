@@ -28,6 +28,7 @@ export const BetsStatusSelector: React.FC<BetsStatusSelectorProps> = ({
         <option value="">All</option>
         <option value="win">Win</option>
         <option value="lost">Lost</option>
+        <option value="canceled">Canceled</option>
       </select>
     </div>
   );

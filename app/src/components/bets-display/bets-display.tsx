@@ -1,3 +1,4 @@
+import { useBetsContext } from "../../hooks/use-bets-context";
 import { useCurrencyFormatting } from "../../hooks/use-currency-formatting";
 import { Bet } from "../../types/bets";
 
@@ -6,7 +7,6 @@ type BetsDisplayProps = {
   onPageChange: (newPage: number, totalPages: number) => void;
   page: number;
   totalPages: number;
-  loading: boolean;
 };
 
 export const BetsDisplay: React.FC<BetsDisplayProps> = ({
@@ -14,9 +14,9 @@ export const BetsDisplay: React.FC<BetsDisplayProps> = ({
   onPageChange,
   page,
   totalPages,
-  loading,
 }) => {
   const { formatCurrency } = useCurrencyFormatting();
+  const { onCancel } = useBetsContext();
 
   return (
     <div>
@@ -31,14 +31,11 @@ export const BetsDisplay: React.FC<BetsDisplayProps> = ({
             <th scope="col">Amount</th>
             <th scope="col">Status</th>
             <th scope="col">Prize</th>
+            <th scope="col">Cancel Bet</th>
           </tr>
         </thead>
         <tbody>
-          {loading ? (
-            <tr>
-              <td colSpan={5}>Loading...</td>
-            </tr>
-          ) : bets && bets.length > 0 ? (
+          {bets && bets.length > 0 ? (
             bets.map((bet) => (
               <tr key={bet.id}>
                 <th scope="row">{bet.id}</th>
@@ -46,17 +43,27 @@ export const BetsDisplay: React.FC<BetsDisplayProps> = ({
                 <td>{formatCurrency(bet.amount)}</td>
                 <td>{bet.status}</td>
                 <td>{bet.winAmount != null ? formatCurrency(bet.winAmount) : "-"}</td>
+                <td>
+                  <button
+                    onClick={() => {
+                      onCancel(bet.id);
+                    }}
+                    disabled={bet.status === "canceled" || bet.loading}
+                  >
+                    {bet.loading ? "Loading..." : bet.status === "canceled" ? "Canceled" : "Cancel"}
+                  </button>
+                </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={5}>No bets found.</td>
+              <td colSpan={6}>No bets found.</td>
             </tr>
           )}
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan={5}>
+            <td colSpan={6}>
               <div>
                 <button onClick={() => onPageChange(page - 1, totalPages)} disabled={page === 1}>
                   ◀

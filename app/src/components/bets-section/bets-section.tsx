@@ -5,7 +5,7 @@ import { BetsStatusSelector } from "../bets-status-selector/bets-status-selector
 import { BetsLimitPerPage } from "../bets-limit-per-page-selector/bets-limit-per-page-selector";
 
 export const BetsSection: React.FC = () => {
-  const { loading, bets, limit, setLimit, page, onPageChange, statusFilter, setStatusFilter } =
+  const { bets, limit, setLimit, page, onPageChange, statusFilter, setStatusFilter } =
     useBetsContext();
 
   const totalPages = useMemo(() => Math.ceil((bets?.total ?? 0) / limit), [bets?.total, limit]);
@@ -31,7 +31,6 @@ export const BetsSection: React.FC = () => {
         onPageChange={onPageChange}
         page={page}
         totalPages={totalPages}
-        loading={loading}
       />
     </section>
   );

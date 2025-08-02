@@ -5,7 +5,7 @@ import { TransactionTypeSelector } from "../transaction-type-selector/transactio
 import { TransactionDisplay } from "../transaction-display/transaction-display";
 
 export const WalletSection: React.FC = () => {
-  const { setLimit, loading, transactions, typeFilter, setTypeFilter, onPageChange, limit, page } =
+  const { setLimit, transactions, typeFilter, setTypeFilter, onPageChange, limit, page } =
     useWalletContext();
 
   const totalPages = useMemo(
@@ -34,7 +34,6 @@ export const WalletSection: React.FC = () => {
         onPageChange={onPageChange}
         page={page}
         totalPages={totalPages}
-        loading={loading}
       />
     </section>
   );
