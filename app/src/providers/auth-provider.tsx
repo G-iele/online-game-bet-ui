@@ -9,6 +9,10 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   const [token, setToken] = useState<string | null>(localStorage.getItem("token") || null);
   const [user, setUser] = useState<User | null>(null);
 
+  if (token) {
+    setAuthToken(token);
+  }
+
   const login = async (data: LoginPayload) => {
     const res = await HttpService.login(data);
     const token = res.data.accessToken;
