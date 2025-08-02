@@ -7,7 +7,7 @@ export type WalletContextProps = {
   page: number;
   onPageChange: (newPage: number, totalPages: number) => void;
   typeFilter: TransactionTypes | null;
-  settypeFilter: (type: TransactionTypes | null) => void;
+  setTypeFilter: (type: TransactionTypes | null) => void;
   loading: boolean;
   getTransactions: () => Promise<void>;
 };

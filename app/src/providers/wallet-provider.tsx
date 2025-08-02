@@ -7,7 +7,7 @@ import { WalletContext } from "../context/wallet-context";
 
 export const WalletProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [transactions, setTransactions] = useState<Transactions | null>(null);
-  const [typeFilter, settypeFilter] = useState<TransactionTypes | null>(null);
+  const [typeFilter, setTypeFilter] = useState<TransactionTypes | null>(null);
   const [loading, setLoading] = useState(true);
 
   const { page, limit, setLimit, onPageChange } = usePagination(1, 5);
@@ -35,7 +35,7 @@ export const WalletProvider: React.FC<React.PropsWithChildren> = ({ children }) 
         page,
         onPageChange,
         typeFilter,
-        settypeFilter,
+        setTypeFilter,
         loading,
         getTransactions,
       }}
