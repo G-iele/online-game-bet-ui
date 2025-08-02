@@ -1,8 +1,22 @@
-export type TransactionType = "bet" | "win" | "cancel";
+export type TransactionTypes = "bet" | "price";
 
-export type TransactionQuery = {
+export type Transaction = {
+  id: string;
+  createdAt: string;
+  amount: number;
+  type: TransactionTypes;
+};
+
+export type Transactions = {
+  data: Transaction[];
+  total: number;
+  page: number;
+  limit: number;
+};
+
+export type TransactionsQuery = {
   page: number;
   limit: number;
   id?: string;
-  type?: TransactionType;
+  type?: TransactionTypes | null;
 };

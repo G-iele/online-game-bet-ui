@@ -1,6 +1,6 @@
 import { LoginPayload, RegisterPayload } from "../types/auth";
 import { BetQuery } from "../types/bets";
-import { TransactionQuery } from "../types/transactions";
+import { TransactionsQuery } from "../types/transactions";
 import { httpClient } from "./base-http-client";
 
 export const HttpService = {
@@ -19,7 +19,7 @@ export const HttpService = {
   getBets: async (params: BetQuery) => {
     return httpClient.get("/my-bets", { params });
   },
-  getTransactions: async (params: TransactionQuery) => {
+  getTransactions: async (params: TransactionsQuery) => {
     return httpClient.get("/my-transactions", { params });
   },
 };

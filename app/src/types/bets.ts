@@ -9,7 +9,6 @@ export type BetQuery = {
 
 export type BetsContextProps = {
   onBet: (amount: number) => Promise<void>;
-  getBets: (data: BetQuery) => Promise<void>;
   bets: Bets | null;
   limit: number;
   setLimit: (limit: number) => void;
@@ -17,6 +16,8 @@ export type BetsContextProps = {
   onPageChange: (newPage: number, totalPages: number) => void;
   statusFilter: BetStatus | null;
   setStatusFilter: (status: BetStatus | null) => void;
+  loading: boolean;
+  getBets: () => Promise<void>;
 };
 
 export type Bet = {

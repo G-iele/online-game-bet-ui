@@ -1,3 +1,5 @@
+import { useAuthContext } from "../../hooks/use-auth-context";
+
 type BetFormProps = {
   handleSubmitBet: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   betAmount: number;
@@ -11,6 +13,10 @@ export const BetForm: React.FC<BetFormProps> = ({
   handleSubmitBet,
   betAmount,
 }) => {
+  const { user } = useAuthContext();
+
+  const balance = user?.balance;
+
   return (
     <form onSubmit={handleSubmitBet}>
       <div>
@@ -21,7 +27,16 @@ export const BetForm: React.FC<BetFormProps> = ({
           name="bet"
           value={betAmount}
           onChange={(e) => {
-            const amount = Number(e.target.value);
+            let amount = Number(e.target.value);
+
+            if (amount < 1) {
+              amount = 1;
+            }
+
+            if (balance && amount > balance) {
+              amount = balance;
+            }
+
             setBetAmount(amount < 1 ? 1 : amount);
           }}
           disabled={isLoading}

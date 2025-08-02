@@ -12,4 +12,7 @@ export default defineConfig({
       include: "**/*.svg",
     }),
   ],
+  server: {
+    host: true,
+  },
 });

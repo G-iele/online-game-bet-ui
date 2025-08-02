@@ -14,7 +14,7 @@ export type LoginPayload = {
 
 export type AuthContextProps = {
   user: User | null;
-  token: string | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
   login: (data: LoginPayload) => Promise<void>;
   register: (data: RegisterPayload) => Promise<void>;
   logout: () => void;

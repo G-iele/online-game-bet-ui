@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { User } from "../types/user";
 import { setAuthToken } from "../services/base-http-client";
 import { HttpService } from "../services/http-service";
@@ -6,19 +6,23 @@ import { LoginPayload, RegisterPayload } from "../types/auth";
 import { AuthContext } from "../context/auth-context";
 
 export const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [token, setToken] = useState<string | null>(localStorage.getItem("token") || null);
-  const [user, setUser] = useState<User | null>(null);
+  const initialUser = localStorage.getItem("user");
+  const [user, setUser] = useState<User | null>(initialUser ? JSON.parse(initialUser) : null);
 
-  if (token) {
-    setAuthToken(token);
+  if (user?.accessToken) {
+    setAuthToken(user?.accessToken);
   }
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    }
+  }, [user]);
 
   const login = async (data: LoginPayload) => {
     const res = await HttpService.login(data);
     const token = res.data.accessToken;
-    const user = res.data.user;
-    localStorage.setItem("token", token);
-    setToken(token);
+    const user: User = res.data;
     setUser(user);
     setAuthToken(token);
   };
@@ -28,14 +32,14 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
+    localStorage.removeItem("user");
+
     setUser(null);
     setAuthToken(null);
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, login, register, logout }}>
+    <AuthContext.Provider value={{ user, setUser, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

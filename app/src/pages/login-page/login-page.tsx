@@ -2,14 +2,21 @@ import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/use-auth-context";
 import axios from "axios";
+import { useBetsContext } from "../../hooks/use-bets-context";
+import { useWalletContext } from "../../hooks/use-wallet-context";
 
 export const LoginPage = () => {
-  const { login, token } = useAuthContext();
+  const { login, user } = useAuthContext();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState<string | null>(null);
+
+  const { getBets } = useBetsContext();
+  const { getTransactions } = useWalletContext();
+
+  const accessToken = user?.accessToken;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,6 +24,8 @@ export const LoginPage = () => {
     try {
       await login({ email, password });
       navigate("/goodluck");
+      getBets();
+      getTransactions();
     } catch (e) {
       if (axios.isAxiosError(e)) {
         setError(e.response?.data?.message);
@@ -26,7 +35,7 @@ export const LoginPage = () => {
     }
   };
 
-  if (token) {
+  if (accessToken) {
     return <Navigate to="/goodluck" replace />;
   }
 

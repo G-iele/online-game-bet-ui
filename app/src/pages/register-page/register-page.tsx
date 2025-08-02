@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const RegisterPage = () => {
-  const { register, token } = useAuthContext();
+  const { register, user } = useAuthContext();
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -13,6 +13,8 @@ export const RegisterPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [error, setError] = useState<string | null>(null);
+
+  const accessToken = user?.accessToken;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +30,7 @@ export const RegisterPage = () => {
     }
   };
 
-  if (token) {
+  if (accessToken) {
     return <Navigate to="/goodluck" replace />;
   }
 

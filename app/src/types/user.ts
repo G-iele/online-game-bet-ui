@@ -1,5 +1,7 @@
 export type User = {
   id: string;
   name: string;
-  email: string;
+  balance: number;
+  accessToken: string;
+  currency: string;
 };
