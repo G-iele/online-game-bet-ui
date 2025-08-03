@@ -18,6 +18,7 @@ export type BetsContextProps = {
   setStatusFilter: (status: BetStatus | null) => void;
   getBets: () => Promise<void>;
   onCancel: (id: string) => Promise<void>;
+  crrBetPrise: number | null;
 };
 
 export type Bet = {

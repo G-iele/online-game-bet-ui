@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { BetsContext } from "../context/bets-context";
 import { HttpService } from "../services/http-service";
-import { Bet, BetQuery, Bets, BetStatus } from "../types/bets";
+import { BetQuery, Bets, BetStatus } from "../types/bets";
 import { usePagination } from "../hooks/use-paginator";
 
 import { useAuthContext } from "../hooks/use-auth-context";
@@ -9,6 +9,7 @@ import { useAuthContext } from "../hooks/use-auth-context";
 export const BetsProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [bets, setBets] = useState<Bets | null>(null);
   const [statusFilter, setStatusFilter] = useState<BetStatus | null>(null);
+  const [crrBetPrise, setCrrBetPrise] = useState<number | null>(null);
 
   const { user, setUser } = useAuthContext();
 
@@ -21,6 +22,7 @@ export const BetsProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
     ]);
 
     setUser((prevUser) => (prevUser ? { ...prevUser, balance: res[0].data.balance } : prevUser));
+    setCrrBetPrise(res[0].data.winAmount || 0);
     getBets();
   };
 
@@ -77,6 +79,7 @@ export const BetsProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
         setStatusFilter,
         getBets,
         onCancel,
+        crrBetPrise,
       }}
     >
       {children}

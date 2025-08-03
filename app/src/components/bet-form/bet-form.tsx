@@ -1,4 +1,6 @@
 import { useAuthContext } from "../../hooks/use-auth-context";
+import { useBetsContext } from "../../hooks/use-bets-context";
+import { useCurrencyFormatting } from "../../hooks/use-currency-formatting";
 
 import classes from "./bet-form.module.scss";
 
@@ -16,6 +18,8 @@ export const BetForm: React.FC<BetFormProps> = ({
   betAmount,
 }) => {
   const { user } = useAuthContext();
+  const { crrBetPrise } = useBetsContext();
+  const { formatCurrency } = useCurrencyFormatting();
 
   const balance = user?.balance;
 
@@ -49,6 +53,10 @@ export const BetForm: React.FC<BetFormProps> = ({
       <button type="submit" disabled={isLoading}>
         {isLoading ? "Betting..." : "Bet!"}
       </button>
+
+      {!isLoading && crrBetPrise !== null && (
+        <h5>{crrBetPrise ? `You won ${formatCurrency(crrBetPrise)}` : "You lost."}</h5>
+      )}
     </form>
   );
 };

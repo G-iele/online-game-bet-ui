@@ -2,6 +2,7 @@
 
 h1,
 h2,
+h5,
 li,
 ul {
   all: unset;
@@ -31,6 +32,12 @@ body {
     font-size: 20px;
     font-weight: 600;
     color: $color-text-secondary;
+  }
+
+  h5 {
+    font-size: 20px;
+    font-weight: 600;
+    color: $color-success;
   }
 }
 
