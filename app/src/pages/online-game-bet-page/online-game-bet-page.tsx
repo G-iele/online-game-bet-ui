@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useWalletContext } from "../../hooks/use-wallet-context";
 import { useBetsContext } from "../../hooks/use-bets-context";
 
+import classes from "./online-game-bet-page.module.scss";
+
 export const OnlineGameBetScreen = () => {
   const [betAmount, setBetAmount] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -27,8 +29,8 @@ export const OnlineGameBetScreen = () => {
   };
 
   return (
-    <div>
-      <h1>Good luck!</h1>
+    <div className={classes.container}>
+      <h1>Bet!</h1>
       <BetForm
         handleSubmitBet={handleSubmitBet}
         betAmount={betAmount}

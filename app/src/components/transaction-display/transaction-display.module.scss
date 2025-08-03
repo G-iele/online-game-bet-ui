@@ -1,0 +1,61 @@
+@use "../../styles/index" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  gap: 24px;
+
+  @media (min-width: $tablet) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.cancelButton {
+  @include button($color-primary, $color-button-secondary, $color-button-secondary-hover);
+  padding: 12px 0;
+}
+
+h4,
+p {
+  margin: unset;
+  padding-bottom: 8px;
+}
+
+p {
+  border-bottom: 1px solid $border-secondary;
+  margin-bottom: 8px;
+
+  &:last-of-type {
+    border-bottom: unset;
+    margin-bottom: 0;
+  }
+}
+
+li {
+  border: 1px solid $border-primary;
+  border-radius: 15px;
+  padding: 8px;
+  width: 100%;
+
+  @media (min-width: $tablet) {
+    width: 350px;
+    padding: 24px;
+  }
+}
+
+.paginator {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 18px;
+  height: 30px;
+
+  button {
+    @include button($color-primary, $color-button-secondary, $color-button-secondary-hover);
+    width: 30px;
+  }
+}

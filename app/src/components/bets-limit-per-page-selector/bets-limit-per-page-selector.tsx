@@ -1,4 +1,4 @@
-import { BetStatus } from "../../types/bets";
+import classes from "./bets-limit-per-page-selector.module.scss";
 
 type BetsLimitPerPageSelectorProps = {
   limit: number;
@@ -14,8 +14,10 @@ export const BetsLimitPerPage: React.FC<BetsLimitPerPageSelectorProps> = ({
   totalPages,
 }) => {
   return (
-    <div>
-      <label htmlFor="limit-select">Bets per page: </label>
+    <div className={classes.container}>
+      <label htmlFor="limit-select" className={classes.label}>
+        Bets per page:
+      </label>
       <select
         id="limit-select"
         value={limit}

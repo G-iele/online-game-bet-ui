@@ -3,10 +3,13 @@ import { HttpService } from "../services/http-service";
 import { usePagination } from "../hooks/use-paginator";
 import { Transactions, TransactionsQuery, TransactionTypes } from "../types/transactions";
 import { WalletContext } from "../context/wallet-context";
+import { useAuthContext } from "../hooks/use-auth-context";
 
 export const WalletProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [transactions, setTransactions] = useState<Transactions | null>(null);
   const [typeFilter, setTypeFilter] = useState<TransactionTypes | null>(null);
+
+  const { user } = useAuthContext();
 
   const { page, limit, setLimit, onPageChange } = usePagination(1, 5);
 
@@ -17,7 +20,9 @@ export const WalletProvider: React.FC<React.PropsWithChildren> = ({ children }) 
   }, [page, limit, typeFilter]);
 
   useEffect(() => {
-    getTransactions();
+    if (user) {
+      getTransactions();
+    }
   }, [getTransactions]);
 
   return (

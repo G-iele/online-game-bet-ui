@@ -1,4 +1,4 @@
-import { BetStatus } from "../../types/bets";
+import classes from "./transaction-limit-per-page-selector.module.scss";
 
 type TransactionLimitPerPageSelectorProps = {
   limit: number;
@@ -14,8 +14,10 @@ export const TransactionLimitPerPage: React.FC<TransactionLimitPerPageSelectorPr
   totalPages,
 }) => {
   return (
-    <div>
-      <label htmlFor="transactions-limit-select">Transactions per page: </label>
+    <div className={classes.container}>
+      <label htmlFor="transactions-limit-select" className={classes.label}>
+        Transactions per page:
+      </label>
       <select
         id="transactions-limit-select"
         value={limit}

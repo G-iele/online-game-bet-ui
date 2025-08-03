@@ -5,6 +5,8 @@ import axios from "axios";
 import { useBetsContext } from "../../hooks/use-bets-context";
 import { useWalletContext } from "../../hooks/use-wallet-context";
 
+import classes from "./login-page.module.scss";
+
 export const LoginPage = () => {
   const { login, user } = useAuthContext();
   const navigate = useNavigate();
@@ -40,10 +42,10 @@ export const LoginPage = () => {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
+    <div className={classes.container}>
+      <h1>Login</h1>
 
+      <form onSubmit={handleSubmit} className={classes.form}>
         {error && <p>{error}</p>}
 
         <input
@@ -61,9 +63,8 @@ export const LoginPage = () => {
         />
         <button type="submit">Login</button>
       </form>
-      <div style={{ padding: 40, textAlign: "center" }}>
-        <a href="/register">Go to Register</a>
-      </div>
-    </>
+
+      <a href="/register">Go to Register</a>
+    </div>
   );
 };

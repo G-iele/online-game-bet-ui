@@ -1,6 +1,8 @@
 import { useCurrencyFormatting } from "../../hooks/use-currency-formatting";
 import { Transactions } from "../../types/transactions";
 
+import classes from "./transaction-display.module.scss";
+
 type TransactionDisplayProps = {
   transactions: Transactions | null;
   onPageChange: (newPage: number, totalPages: number) => void;
@@ -18,57 +20,38 @@ export const TransactionDisplay: React.FC<TransactionDisplayProps> = ({
 
   return (
     <div>
-      <table>
-        <caption>
-          <h2>Your Transactions</h2>
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Date/Time</th>
-            <th scope="col">Type</th>
-            <th scope="col">Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transactions?.total ? (
-            transactions.data.map((transaction) => (
-              <tr key={transaction.id}>
-                <th scope="row">{transaction.id}</th>
-                <td>{new Date(transaction.createdAt).toLocaleString()}</td>
-                <td>{transaction.type}</td>
-                <td>{formatCurrency(transaction.amount)}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={4}>No transactions found.</td>
-            </tr>
-          )}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan={4}>
-              <div>
-                <button onClick={() => onPageChange(page - 1, totalPages)} disabled={page === 1}>
-                  ◀
-                </button>
-                {Array.from({ length: totalPages }, (_, i) => (
-                  <button key={i} onClick={() => onPageChange(i + 1, totalPages)}>
-                    {i + 1}
-                  </button>
-                ))}
-                <button
-                  onClick={() => onPageChange(page + 1, totalPages)}
-                  disabled={page === totalPages}
-                >
-                  ▶
-                </button>
-              </div>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
+      <ul className={classes.card}>
+        {transactions && transactions?.total > 0 ? (
+          transactions.data.map((transaction) => (
+            <li key={transaction.id}>
+              <h4>ID</h4>
+              <p>{transaction.id}</p>
+              <h4>Date/Time</h4>
+              <p>{new Date(transaction.createdAt).toLocaleString()}</p>
+              <h4>Tipe</h4>
+              <p>{transaction.type}</p>
+              <h4>Amount</h4>
+              <p>{formatCurrency(transaction.amount)}</p>
+            </li>
+          ))
+        ) : (
+          <li>No Transaction found.</li>
+        )}
+      </ul>
+
+      <div className={classes.paginator}>
+        <button onClick={() => onPageChange(page - 1, totalPages)} disabled={page === 1}>
+          {`<`}
+        </button>
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button key={i} onClick={() => onPageChange(i + 1, totalPages)}>
+            {i + 1}
+          </button>
+        ))}
+        <button onClick={() => onPageChange(page + 1, totalPages)} disabled={page === totalPages}>
+          {`>`}
+        </button>
+      </div>
     </div>
   );
 };

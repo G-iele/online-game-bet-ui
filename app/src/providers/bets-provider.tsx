@@ -10,7 +10,7 @@ export const BetsProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   const [bets, setBets] = useState<Bets | null>(null);
   const [statusFilter, setStatusFilter] = useState<BetStatus | null>(null);
 
-  const { setUser } = useAuthContext();
+  const { user, setUser } = useAuthContext();
 
   const { page, limit, setLimit, onPageChange } = usePagination(1, 5);
 
@@ -31,7 +31,9 @@ export const BetsProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   }, [page, limit, statusFilter]);
 
   useEffect(() => {
-    getBets();
+    if (user) {
+      getBets();
+    }
   }, [getBets]);
 
   const onCancel = async (id: string) => {

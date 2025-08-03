@@ -1,5 +1,12 @@
 @use "./styles/index" as *;
 
+h1,
+h2,
+li,
+ul {
+  all: unset;
+}
+
 *,
 *::before,
 *::after {
@@ -8,15 +15,28 @@
 
 body {
   margin: 0;
-  padding: 0 24px 24px;
+  padding: 24px 24px;
   font-family: "Red Hat Text", sans-serif;
+  background-color: $color-background;
+  color: $color-text-primary;
+  font-size: 16px;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: $color-text-secondary;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: $color-text-secondary;
+  }
 
   @media (min-width: $tablet) {
-    padding: 0 24px 24px;
   }
 
   @media (min-width: $desktop) {
-    padding: 0 110px 95px;
   }
 }
 
@@ -32,4 +52,17 @@ th,
 td {
   border: 1px solid rgb(160 160 160);
   padding: 8px 10px;
+}
+
+a {
+  color: $color-text-primary;
+}
+
+select {
+  width: 100px;
+  font-size: 16px;
+}
+
+section {
+  width: 100%;
 }

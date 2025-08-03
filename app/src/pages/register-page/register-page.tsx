@@ -3,6 +3,8 @@ import { useAuthContext } from "../../hooks/use-auth-context";
 import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import classes from "./register-page.module.scss";
+
 export const RegisterPage = () => {
   const { register, user } = useAuthContext();
   const navigate = useNavigate();
@@ -35,10 +37,10 @@ export const RegisterPage = () => {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <h2>Register</h2>
+    <div className={classes.container}>
+      <h1>Online Game Bet</h1>
 
+      <form onSubmit={handleSubmit} className={classes.form}>
         {error && <p>{error}</p>}
 
         <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" required />
@@ -64,9 +66,7 @@ export const RegisterPage = () => {
         />
         <button type="submit">Register</button>
       </form>
-      <div style={{ padding: 40, textAlign: "center" }}>
-        <a href="/login">Go to Login</a>
-      </div>
-    </>
+      <a href="/login">Go to Login</a>
+    </div>
   );
 };

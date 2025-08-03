@@ -1,0 +1,45 @@
+@mixin shadow {
+  box-shadow: 0px 0px 8px 1px rgba(0, 150, 255, 0.05);
+}
+
+@mixin button($color, $background-color, $hover-color) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+
+  border-radius: 15px;
+  background-color: $background-color;
+  color: $color;
+  font-weight: 600;
+  font-size: 16px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border 0.3s ease;
+
+  &:hover,
+  :focus {
+    background-color: $hover-color;
+  }
+  cursor: pointer;
+
+  &:disabled {
+    background-color: $hover-color;
+    opacity: 0.6;
+  }
+}
+
+@mixin text-link($color) {
+  color: $color;
+  cursor: pointer;
+  text-decoration: none;
+  transition: text-decoration 0.2s ease;
+  font-size: 16x;
+
+  &:hover,
+  &:active {
+    text-decoration: underline;
+  }
+}

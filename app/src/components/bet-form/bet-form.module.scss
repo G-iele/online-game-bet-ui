@@ -1,0 +1,51 @@
+@use "../../styles/index" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+
+  @media (min-width: $tablet) {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: $desktop) {
+    max-width: 900px;
+  }
+
+  input {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: $color-background;
+    color: $color-text-primary;
+
+    &:focus {
+      outline: none;
+      border-color: $color-text-accent;
+    }
+  }
+
+  button {
+    @include button($color-primary, $color-button-secondary, $color-button-secondary-hover);
+    padding: 12px 0;
+  }
+}
+
+a {
+  @include text-link($color-text-secondary);
+}

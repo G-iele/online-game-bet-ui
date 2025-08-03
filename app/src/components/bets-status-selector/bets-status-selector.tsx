@@ -1,4 +1,5 @@
 import { BetStatus } from "../../types/bets";
+import classes from "./bets-status-selector.module.scss";
 
 type BetsStatusSelectorProps = {
   setStatusFilter: (status: BetStatus | null) => void;
@@ -14,7 +15,7 @@ export const BetsStatusSelector: React.FC<BetsStatusSelectorProps> = ({
   totalPages,
 }) => {
   return (
-    <div>
+    <div className={classes.container}>
       <label htmlFor="status-select">Filter by status:</label>
       <select
         id="status-select"

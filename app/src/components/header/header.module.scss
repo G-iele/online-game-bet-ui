@@ -1,0 +1,49 @@
+@use "../../styles/index" as *;
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: $color-text-accent;
+  padding-bottom: 24px;
+
+  .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav {
+    display: flex;
+    gap: 14px;
+  }
+
+  .mobileButton {
+    @include button($color-primary, $color-button-secondary, $color-button-secondary-hover);
+    padding: 5px 0;
+    width: 30px;
+
+    @media (min-width: $tablet) {
+      display: none;
+    }
+
+    @media (min-width: $desktop) {
+      display: none;
+    }
+  }
+
+  .tabletButton {
+    display: none;
+
+    @media (min-width: $tablet) {
+      display: inline;
+      @include button($color-primary, $color-button-secondary, $color-button-secondary-hover);
+      padding: 8px 0;
+      width: 80px;
+    }
+  }
+
+  a {
+    @include text-link($color-text-secondary);
+  }
+}

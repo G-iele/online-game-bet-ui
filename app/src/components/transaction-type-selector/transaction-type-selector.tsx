@@ -1,5 +1,7 @@
 import { TransactionTypes } from "../../types/transactions";
 
+import classes from "./transaction-type-selector.module.scss";
+
 type TransactionTypeSelectorProps = {
   setTypeFilter: (status: TransactionTypes | null) => void;
   typeFilter: TransactionTypes | null;
@@ -14,7 +16,7 @@ export const TransactionTypeSelector: React.FC<TransactionTypeSelectorProps> = (
   totalPages,
 }) => {
   return (
-    <div>
+    <div className={classes.container}>
       <label htmlFor="type-select">Filter by type:</label>
       <select
         id="type-select"
